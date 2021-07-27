@@ -53,7 +53,8 @@ const Rating = ({ value, text, color }) => {
       <span>{star2}</span>
       <span>{star3}</span>
       <span>{star4}</span>
-      <span>{star5}</span>
+      <span>{star5}</span>&nbsp;
+      <span>{text && text}</span>
     </div>
   );
 };
