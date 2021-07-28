@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import products from "../../products";
 import ProductItem from "../common/ProductItem";
+import axios from "axios";
 
 const Home = () => {
+  // products state
+  const [products, setProducts] = useState([]);
+
+  // api call
+  useEffect(
+    () => {
+      const fetchProducts = async () => {
+        try {
+          const { data } = await axios.get("/api/products/");
+          // setproducts
+          setProducts(data);
+
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      // call fetchProducts method
+      fetchProducts();
+    },
+
+    // eslint-disable-next-line
+    []
+  );
+
   return (
     <div>
       <h1>Latest Products</h1>
