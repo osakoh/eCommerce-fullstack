@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import axios from "axios";
 import { Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap";
 import Rating from "../common/Rating";
-import products from "../../products";
 
 const ProductDetail = () => {
+  // products state
+  const [product, setProduct] = useState([]);
+
   // destructure the product id using useParams hook; whatever name was used in the path(path='/product/:id') in app.js is used here
   const { id } = useParams();
+
+  // api call
+  useEffect(
+    () => {
+      const fetchProduct = async () => {
+        try {
+          const { data } = await axios.get(`/api/products/${id}`);
+          // setproducts
+          setProduct(data);
+        } catch (error) {
+          console.log(error, "from ProductDetail JS");
+        }
+      };
+
+      // call fetchProducts method
+      fetchProduct();
+    },
+
+    // eslint-disable-next-line
+    []
+  );
+
   // extract a specific product which matches the id; both id's are of a 'string' type
-  const product = products.find((p) => p._id === id);
+  // const product = products.find((p) => p._id === id);
 
   return (
     <div>

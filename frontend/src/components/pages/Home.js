@@ -15,10 +15,8 @@ const Home = () => {
           const { data } = await axios.get("/api/products/");
           // setproducts
           setProducts(data);
-
-          console.log(data);
         } catch (error) {
-          console.log(error);
+          console.log(error, "from Home JS");
         }
       };
 
