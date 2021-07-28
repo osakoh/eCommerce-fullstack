@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 
 class Product(models.Model):
     """
-    Many Products to one User/One User to many Products
+    Multiple Products to one User/One User to multiple Products
     """
 
-    # models.SET_NULL: doesn't delete product if user gets deleted | null=True: allows a product to be created without a user
+    # on_delete=models.SET_NULL: when a User gets deleted, the associated Product would not be deleted | null=True: allows a product to be created without a user
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
-    # image = models.ImageField(null=True, blank=True, default="/placeholder.png")
+    image = models.ImageField(null=True, blank=True, default="/placeholder.png")
     brand = models.CharField(max_length=200, null=True, blank=True)
     category = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
@@ -30,8 +30,8 @@ class Product(models.Model):
 
 class Review(models.Model):
     """
-    Many reviews to one Product
-    Many reviews to one User
+    Multiple reviews to one Product
+    Multiple reviews to one User
     """
 
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
@@ -48,7 +48,7 @@ class Review(models.Model):
 
 class Order(models.Model):
     """
-    Many Orders to one User
+    Multiple Orders to one User
     """
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -75,8 +75,8 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     """
-    Many OrderItems to one Product
-    Many OrderItems to one Order
+    Multiple OrderItems to one Product
+    Multiple OrderItems to one Order
     """
 
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
@@ -96,6 +96,7 @@ class ShippingAddress(models.Model):
     One ShippingAddress to one Order
     """
 
+    # on_delete=models.CASCADE: when an Order is deleted, the associated ShippingAddress is also deleted.
     order = models.OneToOneField(Order, on_delete=models.CASCADE, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
     city = models.CharField(max_length=200, null=True, blank=True)
