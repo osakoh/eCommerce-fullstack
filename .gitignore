@@ -10,7 +10,7 @@ __pycache__/
 local_settings.py
 db.sqlite3
 /media
-extra_note.txt
+exta_note.txt
 log.txt
 
 
