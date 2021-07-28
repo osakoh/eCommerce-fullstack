@@ -126,13 +126,17 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# the url path to the static files directory
 STATIC_URL = "/static/"
 
+# this folder is created whenever the 'collectstatic' command is ran
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # list of directories containing static files (CSS, JavaScript, Images)
 STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "frontend/build/static"]
 
-# where an uploaded is kept
+# the url path to an uploaded image
 MEDIA_URL = "/images/"
+
+# where an uploaded image is kept
 MEDIA_ROOT = BASE_DIR / "static/images"

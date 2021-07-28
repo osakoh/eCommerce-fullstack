@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
+from rest_framework import status
 from rest_framework.response import Response
 from django.http import JsonResponse
+from .models import Product
+from .serializers import ProductSerializer
 from .products import products
 
 # Create your views here.
@@ -26,23 +29,29 @@ def getRoutes(request):
 @api_view(["GET"])
 def getProducts(request):
     """
+    Handles GET and POST request method i.e, non-primary key based operations
     returns a serialized list of all the available products
     """
-
+    products = Product.objects.all()
+    serializer = ProductSerializer(products, many=True)
     # safe=False: allows non-dict objects to be serialized
-    return Response(products)
+    return Response(serializer.data)
 
 
 @api_view(["GET"])
 def getProduct(request, pk):
     """
-    returns a single serialized product
+    Handles GET, PUT and DELETE request method i.e, primary key based operations
     """
-    product = None
 
-    for i in products:
-        if i["_id"] == pk:
-            product = i
-            break
+    # try:
+    #     product = Product.objects.get(_id=pk)
+    # except Product.DoesNotExist:
+    #     return Response(status=status.HTTP_404_NOT_FOUND)
 
-    return Response(product)
+    product = get_object_or_404(Product, _id=pk)
+
+    #  returns a single serialized product
+    if request.method == "GET":
+        serializer = ProductSerializer(product)
+        return Response(serializer.data)
