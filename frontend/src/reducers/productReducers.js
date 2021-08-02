@@ -44,15 +44,29 @@ export const productDetailsReducer = (
   action
 ) => {
   switch (action.type) {
+    // loading the product list
     case PRODUCT_DETAILS_REQUEST:
-      return { loading: true, ...state };
+      return {
+        loading: true,
+        ...state,
+      };
 
+    // data(products) gotten from the server
     case PRODUCT_DETAILS_SUCCESS:
-      return { loading: false, product: action.payload };
+      return {
+        loading: false,
+        product: action.payload,
+      };
+
+    // error retriving data(products) from the server
 
     case PRODUCT_DETAILS_FAIL:
-      return { loading: false, error: action.payload };
+      return {
+        loading: false,
+        error: action.payload,
+      };
 
+    // returns the initial state
     default:
       return state;
   }

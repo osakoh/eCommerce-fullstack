@@ -24,11 +24,7 @@ const Home = () => {
   if (loading) {
     homeContent = <Loader />;
   } else if (error) {
-    homeContent = (
-      <Message variant='danger' heading='Error Loading!'>
-        {error}
-      </Message>
-    );
+    homeContent = <Message variant='danger'>{error}</Message>;
   } else {
     homeContent = (
       <Row>
