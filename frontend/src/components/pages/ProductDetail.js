@@ -1,13 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../actions/productActions";
-import { Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Button,
+  Card,
+  Form,
+} from "react-bootstrap";
 import Rating from "../common/Rating";
 import Loader from "../common/Loader";
 import Message from "../common/Message";
 
 const ProductDetail = () => {
+  // select quantity state
+  const [quantity, setQuantity] = useState(1);
   // dispatch
   const dispatch = useDispatch();
   // select product details state from store
@@ -91,6 +101,29 @@ const ProductDetail = () => {
                 </Row>
               </ListGroup.Item>
               {/* product stock */}
+
+              {/* quantity select dropdown */}
+              {product.countInStock > 0 && (
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Qty</Col>
+                    <Col xs='' className='my-1'>
+                      <Form.Control
+                        as='select'
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                      >
+                        {[...Array(product.countInStock).keys()].map((idx) => (
+                          <option key={idx + 1} value={idx + 1}>
+                            {idx + 1}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              )}
+              {/* quantity select dropdown */}
 
               <ListGroup.Item>
                 <Row>

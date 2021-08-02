@@ -26,8 +26,8 @@ export const listProducts = () => async (dispatch) => {
       type: PRODUCT_LIST_FAIL,
       payload:
         error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
+          ? error.response.data.detail // DRF error
+          : error.message, // XHR error
     });
   }
 };
@@ -50,8 +50,8 @@ export const getProductDetails = (id) => async (dispatch) => {
       type: PRODUCT_DETAILS_FAIL,
       payload:
         error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
+          ? error.response.data.detail // DRF error
+          : error.message, // XHR error
     });
   }
 };
