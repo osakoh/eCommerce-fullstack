@@ -6,7 +6,7 @@ import {
 } from "../constants/productConstants";
 
 // makes a request to get products
-const listProducts = () => async (dispatch) => {
+export const listProducts = () => async (dispatch) => {
   try {
     // request products
     dispatch({ type: PRODUCT_LIST_REQUEST });

@@ -6,6 +6,7 @@ const Loader = () => {
     <Spinner
       animation='grow'
       role='status'
+      variant='dark'
       style={{
         height: "100px",
         width: "100px",
