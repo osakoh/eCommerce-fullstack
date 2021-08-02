@@ -48,7 +48,7 @@ export const productDetailsReducer = (
     case PRODUCT_DETAILS_REQUEST:
       return {
         loading: true,
-        ...state,
+        ...state, // due to the array(reviews) within the product object
       };
 
     // data(products) gotten from the server
